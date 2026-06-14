@@ -1,6 +1,8 @@
 #ifndef UI_DISPLAY_H
 #define UI_DISPLAY_H
 
+#include <stdint.h>
+
 /**
  * Displays the temperature value on the OLED or LCD interface.
  *
@@ -100,5 +102,16 @@ void UI_ShowMpuOkScreen(long counter,
  * UI_ShowMpuErrorScreen(counter);
  */
 void UI_ShowMpuErrorScreen(long counter);
+
+/**
+ * Displays live roll/pitch, direction label, calibration flag, and temperature.
+ */
+void UI_ShowSensorStatus(int roll, int pitch, const char *dir_label,
+                         int temp_x10, uint8_t calibrated, uint8_t temp_warn);
+
+/**
+ * Displays MPU6500 calibration progress (0-100 %) on the OLED.
+ */
+void UI_ShowCalibrationScreen(uint8_t progress_pct);
 
 #endif

@@ -31,6 +31,13 @@
 static SnakeGame game;
 
 /*
+ * Temperature-based speed adjustment in milliseconds.
+ *
+ * Negative values make the Snake move faster (harder) when temperature rises.
+ */
+static int16_t temp_speed_adjust_ms = 0;
+
+/*
  * ============================================================================
  * Pseudo-Random Number Generator (LCG)
  * ============================================================================
@@ -542,6 +549,7 @@ void SnakeGame_Init(void)
     game.grow_pending   = 0U;
     game.level_up_occurred = 0U;
     game.temperature_x10 = 0;
+    temp_speed_adjust_ms = 0;
 
     /*
      * Clear the Snake body array.
@@ -1226,9 +1234,27 @@ DifficultyLevel SnakeGame_GetLevel(void)
 /*
  * Returns the current game speed (tick interval in milliseconds).
  */
-uint16_t SnakeGame_GetGameSpeed(void)
+uint16_t SnakeGame_GetBaseGameSpeed(void)
 {
     return game.game_speed_ms;
+}
+
+uint16_t SnakeGame_GetGameSpeed(void)
+{
+    int32_t effective;
+
+    effective = (int32_t)game.game_speed_ms + (int32_t)temp_speed_adjust_ms;
+
+    if (effective < 80)
+    {
+        effective = 80;
+    }
+    if (effective > 250)
+    {
+        effective = 250;
+    }
+
+    return (uint16_t)effective;
 }
 
 /*
@@ -1261,6 +1287,35 @@ int SnakeGame_GetTemperature(void)
 void SnakeGame_SetTemperature(int temp_x10)
 {
     game.temperature_x10 = temp_x10;
+}
+
+void SnakeGame_ApplyTemperatureDifficulty(int temp_x10)
+{
+    int excess;
+
+    temp_speed_adjust_ms = 0;
+
+    if (temp_x10 <= 300)
+    {
+        return;
+    }
+
+    /*
+     * Above 30.0 C, reduce the tick interval by 2 ms per 0.5 C (5 tenths).
+     * Example: 32.0 C -> 8 ms faster; 35.0 C -> 20 ms faster.
+     */
+    excess = temp_x10 - 300;
+    temp_speed_adjust_ms = (int16_t)(-((excess * 2) / 5));
+
+    if (temp_x10 >= 350)
+    {
+        temp_speed_adjust_ms -= 10;
+    }
+}
+
+uint8_t SnakeGame_IsHighTemperatureWarning(void)
+{
+    return (game.temperature_x10 >= 350) ? 1U : 0U;
 }
 
 /*

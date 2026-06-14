@@ -248,7 +248,7 @@ void UI_PrintTempFixed(int temp_x10)
      * Print the letter C on the OLED to show that the temperature is in Celsius.
      *
      * Example final OLED output:
-     * 25.3∞C
+     * 25.3ùC
      */
     OLED_PrintString("C");
 
@@ -830,4 +830,98 @@ void UI_ShowMpuErrorScreen(long counter)
      * Delay for 10 milliseconds before the next update.
      */
     delayMs(10);
+}
+
+void UI_ShowSensorStatus(int roll, int pitch, const char *dir_label,
+                         int temp_x10, uint8_t calibrated, uint8_t temp_warn)
+{
+    char buffer[12];
+    int whole;
+    int frac;
+
+    OLED_SetCursor(0, 0);
+    OLED_PrintString("R:");
+    intToStr(roll, buffer);
+    OLED_PrintString(buffer);
+    OLED_PrintString(" P:");
+    intToStr(pitch, buffer);
+    OLED_PrintString(buffer);
+    OLED_PrintString("   ");
+
+    OLED_SetCursor(2, 0);
+    OLED_PrintString("Dir:");
+    OLED_PrintString(dir_label);
+    OLED_PrintString(calibrated ? " CAL:OK" : " CAL:--");
+
+    whole = temp_x10 / 10;
+    frac = temp_x10 % 10;
+    if (frac < 0)
+    {
+        frac = -frac;
+    }
+
+    OLED_SetCursor(4, 0);
+    if (temp_warn != 0U)
+    {
+        OLED_PrintString("TEMP! ");
+    }
+    else
+    {
+        OLED_PrintString("Temp ");
+    }
+    intToStr(whole, buffer);
+    OLED_PrintString(buffer);
+    OLED_PrintString(".");
+    intToStr(frac, buffer);
+    OLED_PrintString(buffer);
+    OLED_PrintString("C   ");
+
+    lcd_set_cursor(0, 0);
+    lcd_print("R:");
+    intToStr(roll, buffer);
+    lcd_print(buffer);
+    lcd_print(" P:");
+    intToStr(pitch, buffer);
+    lcd_print(buffer);
+
+    lcd_set_cursor(1, 0);
+    lcd_print("Dir:");
+    lcd_print(dir_label);
+    if (temp_warn != 0U)
+    {
+        lcd_print(" T!");
+    }
+    else
+    {
+        lcd_print(" T:");
+        intToStr(whole, buffer);
+        lcd_print(buffer);
+        lcd_print(".");
+        intToStr(frac, buffer);
+        lcd_print(buffer);
+    }
+}
+
+void UI_ShowCalibrationScreen(uint8_t progress_pct)
+{
+    char buffer[12];
+
+    OLED_Clear();
+    OLED_SetCursor(1, 0);
+    OLED_PrintString("MPU6500 Calibrate");
+    OLED_SetCursor(3, 0);
+    OLED_PrintString("Keep board flat...");
+    OLED_SetCursor(5, 0);
+    OLED_PrintString("Progress:");
+    intToStr((int)progress_pct, buffer);
+    OLED_PrintString(buffer);
+    OLED_PrintString("%");
+
+    lcd_set_cursor(0, 0);
+    lcd_print("Calibrating MPU");
+    lcd_set_cursor(1, 0);
+    lcd_print("Progress:");
+    intToStr((int)progress_pct, buffer);
+    lcd_print(buffer);
+    lcd_print("%       ");
 }
