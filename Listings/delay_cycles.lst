@@ -1,0 +1,67 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             |.text|, CODE, READONLY
+    2 00000000                 THUMB
+    3 00000000                 EXPORT           delay_cycles
+    4 00000000         
+    5 00000000         delay_cycles
+    6 00000000 0880            LSRS             r0, r0, #2
+    7 00000002 D002            BEQ              done
+    8 00000004         loop
+    9 00000004 1E40            SUBS             r0, r0, #1
+   10 00000006 BF00            NOP
+   11 00000008 D1FC            BNE              loop
+   12 0000000A         done
+   13 0000000A 4770            BX               lr
+   14 0000000C                 END
+Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M4.fp.sp 
+--depend=.\objects\delay_cycles.d -o.\objects\delay_cycles.o -I.\RTE\_Target_1 
+-IC:\Users\manna\AppData\Local\Arm\Packs\ARM\CMSIS\6.3.0\CMSIS\Core\Include -IC
+:\Users\manna\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\D
+evice\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_V
+ERSION SETA 543" --predefine="STM32F401xE SETA 1" --predefine="_RTE_ SETA 1" --
+list=.\listings\delay_cycles.lst src\delay_cycles.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 1 in file src\delay_cycles.s
+   Uses
+      None
+Comment: .text unused
+delay_cycles 00000000
+
+Symbol: delay_cycles
+   Definitions
+      At line 5 in file src\delay_cycles.s
+   Uses
+      At line 3 in file src\delay_cycles.s
+Comment: delay_cycles used once
+done 0000000A
+
+Symbol: done
+   Definitions
+      At line 12 in file src\delay_cycles.s
+   Uses
+      At line 7 in file src\delay_cycles.s
+Comment: done used once
+loop 00000004
+
+Symbol: loop
+   Definitions
+      At line 8 in file src\delay_cycles.s
+   Uses
+      At line 11 in file src\delay_cycles.s
+Comment: loop used once
+4 symbols
+339 symbols in table
