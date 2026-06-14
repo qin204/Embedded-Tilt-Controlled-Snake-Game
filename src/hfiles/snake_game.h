@@ -628,6 +628,27 @@ int SnakeGame_GetTemperature(void);
 void SnakeGame_SetTemperature(int temp_x10);
 
 /*
+ * Applies optional temperature-based difficulty adjustment.
+ *
+ * When the measured temperature rises above 30.0 C, the effective game speed
+ * increases (tick interval decreases) to make control harder.
+ *
+ * Call after SnakeGame_SetTemperature() whenever a new reading is available.
+ */
+void SnakeGame_ApplyTemperatureDifficulty(int temp_x10);
+
+/*
+ * Returns 1 when the stored temperature is at or above the high-temperature
+ * warning threshold (35.0 C).
+ */
+uint8_t SnakeGame_IsHighTemperatureWarning(void);
+
+/*
+ * Returns the base game speed for the current level, ignoring temperature.
+ */
+uint16_t SnakeGame_GetBaseGameSpeed(void);
+
+/*
  * Checks whether the Snake can grow further.
  *
  * Returns:

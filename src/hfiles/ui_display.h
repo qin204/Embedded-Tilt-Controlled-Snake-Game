@@ -2,22 +2,6 @@
 #define UI_DISPLAY_H
 
 #include <stdint.h>
-#include "snake_game.h"
-
-/*
- * ============================================================================
- * Startup Sequence
- * ============================================================================
- */
-
-/**
- * Displays the group number "7" in the centre of the OLED screen.
- *
- * Called once during the startup boot sequence.
- * The calling code should hold this screen for 1 second
- * before moving to the member display screens.
- */
-void UI_ShowGroupNumber(void);
 
 /**
  * Displays one member's information on the OLED.
@@ -290,4 +274,15 @@ void UI_PrintTempAt(uint8_t page, uint8_t column, int temp_x10);
  */
 void UI_LCD_PrintTemp(int temp_x10);
 
-#endif /* UI_DISPLAY_H */
+/**
+ * Displays live roll/pitch, direction label, calibration flag, and temperature.
+ */
+void UI_ShowSensorStatus(int roll, int pitch, const char *dir_label,
+                         int temp_x10, uint8_t calibrated, uint8_t temp_warn);
+
+/**
+ * Displays MPU6500 calibration progress (0-100 %) on the OLED.
+ */
+void UI_ShowCalibrationScreen(uint8_t progress_pct);
+
+#endif

@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\drivers</IncludePath>
+              <IncludePath>.\drivers;.\src\hfiles</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,9 +385,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>demo_main.c</FileName>
+              <FileName>sensor_test_main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\demo_main.c</FilePath>
+              <FilePath>.\src\sensor_test_main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -731,6 +731,61 @@
               <FileName>ui_display.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\ui_display.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sensor_processing</GroupName>
+          <Files>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>tilt_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\tilt_control.c</FilePath>
+            </File>
+            <File>
+              <FileName>temp_sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\temp_sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor_processing.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\sensor_processing.c</FilePath>
+            </File>
+            <File>
+              <FileName>snake_game.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\snake_game.c</FilePath>
+            </File>
+            <File>
+              <FileName>filter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\hfiles\filter.h</FilePath>
+            </File>
+            <File>
+              <FileName>tilt_control.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\hfiles\tilt_control.h</FilePath>
+            </File>
+            <File>
+              <FileName>temp_sensor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\hfiles\temp_sensor.h</FilePath>
+            </File>
+            <File>
+              <FileName>sensor_processing.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\hfiles\sensor_processing.h</FilePath>
+            </File>
+            <File>
+              <FileName>snake_game.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\hfiles\snake_game.h</FilePath>
             </File>
           </Files>
         </Group>
