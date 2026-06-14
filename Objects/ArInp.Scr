@@ -1,0 +1,15 @@
+--create .\Objects\Demo_mini_Project.lib
+.\objects\demo_main.o
+.\objects\gpio.o
+.\objects\i2c.o
+.\objects\stm32f4xx_adc.o
+.\objects\stm32f4xx_gpio.o
+.\objects\stm32f4xx_i2c.o
+.\objects\stm32f4xx_rcc.o
+.\objects\stm32f4xx_usart.o
+.\objects\timer.o
+.\objects\uart.o
+.\src\Libfiles\LCDFunctions.lib
+.\src\Libfiles\Demo_mini_Project.lib
+.\objects\utils.o
+.\objects\ui_display.o

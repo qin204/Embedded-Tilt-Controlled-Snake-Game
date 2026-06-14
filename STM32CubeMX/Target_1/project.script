@@ -1,0 +1,5 @@
+load STM32F401RETx
+project name STM32CubeMX
+project toolchain "MDK-ARM V5"
+project path "U:\OneDrive - Queen Mary, University of London\Documents - JPESD - EBU6475_EBU5477\General\EBU5477_2026_version\block 1 & 2\KeilPrj\blinky\STM32CubeMX\Target_1"
+SetCopyLibrary "copy only"
