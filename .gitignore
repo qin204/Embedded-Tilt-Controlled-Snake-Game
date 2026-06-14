@@ -1,0 +1,28 @@
+/Mini-Project Specifications  Briefs.pdf
+/test_snake_c.c
+
+# Build outputs
+Objects/
+Listings/
+DebugConfig/
+
+# Keil project artifacts
+*.uvguix.*
+*.uvoptx
+*.build_log.htm
+*.dep
+*.crf
+*.d
+*.o
+*.axf
+*.hex
+*.bin
+*.elf
+*.map
+
+# Editor / OS
+*. bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
